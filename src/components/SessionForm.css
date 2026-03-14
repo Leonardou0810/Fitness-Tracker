@@ -1,0 +1,343 @@
+.session-form {
+  max-width: 640px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.session-form-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .session-form {
+    gap: 1.5rem;
+  }
+
+  .session-form-header h2 {
+    font-size: 1.75rem;
+  }
+}
+
+.session-form-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-row label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+@media (min-width: 480px) {
+  .form-row label {
+    min-width: 140px;
+  }
+}
+
+.form-row label span,
+.field-notes span,
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.form-row input,
+.form-row select {
+  padding: 0.65rem 0.75rem;
+  min-height: 44px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 16px; /* prevents zoom on iOS */
+}
+
+@media (min-width: 640px) {
+  .form-row input,
+  .form-row select {
+    padding: 0.6rem 0.75rem;
+    min-height: auto;
+  }
+}
+
+.form-row input:focus,
+.form-row select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.exercises-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.exercises-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exercises-header h3 {
+  font-size: 1.1rem;
+}
+
+.btn-add {
+  padding: 0.6rem 1rem;
+  min-height: 44px;
+  background: var(--bg-elevated);
+  color: var(--accent-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.btn-add:hover {
+  background: var(--accent-glow);
+}
+
+.exercise-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: stretch;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+@media (min-width: 480px) {
+  .exercise-block {
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+.exercise-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.field-name input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  min-height: 44px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 16px; /* prevents zoom on iOS focus */
+}
+
+@media (min-width: 640px) {
+  .field-name input {
+    padding: 0.6rem 0.75rem;
+    min-height: auto;
+  }
+}
+
+.field-name input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.field-numbers {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 0.75rem;
+}
+
+.field-number {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.field-number .number-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.field-numbers input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.5rem 0.6rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+@media (min-width: 480px) {
+  .field-numbers {
+    grid-template-columns: repeat(3, 90px);
+    gap: 1rem;
+  }
+}
+
+.field-weight input {
+  min-width: 0;
+}
+
+@media (min-width: 480px) {
+  .field-weight input {
+    min-width: 140px;
+  }
+}
+
+.exercise-workload {
+  font-size: 0.9rem;
+  color: var(--accent-primary);
+  padding: 0.35rem 0;
+}
+
+.exercise-workload strong {
+  font-family: 'Outfit', sans-serif;
+}
+
+.field-muscles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.muscle-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  padding: 0.45rem 0.75rem;
+  min-height: 36px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  color: var(--text-primary);
+}
+
+.chip.active {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  border-color: var(--accent-primary);
+}
+
+.btn-remove {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  align-self: flex-end;
+}
+
+@media (min-width: 480px) {
+  .exercise-block .btn-remove {
+    align-self: flex-start;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+}
+
+.btn-remove:hover:not(:disabled) {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.btn-remove:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.field-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-notes textarea {
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.field-notes textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.75rem 1.25rem;
+  min-height: 44px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+  background: var(--accent-secondary);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
