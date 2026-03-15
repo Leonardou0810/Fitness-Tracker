@@ -1,0 +1,71 @@
+/* Auth page: centered login/register card */
+.auth-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.auth-card .session-form {
+  max-width: none;
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  padding: 0.25rem;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.auth-tabs button {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.auth-tabs button:hover {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+.auth-tabs button.active {
+  color: var(--bg-primary);
+  background: var(--accent-primary);
+}
+
+.auth-card .form-actions {
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.auth-card .btn-primary {
+  width: 100%;
+  order: -1;
+}
+
+.auth-card .btn-secondary {
+  width: 100%;
+}
+
+.session-form-error {
+  color: #f87171;
+  font-size: 0.9rem;
+  margin-top: -0.25rem;
+}

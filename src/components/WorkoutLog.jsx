@@ -1,16 +1,9 @@
 import { format } from 'date-fns'
-import { BODY_PARTS, deleteWorkoutSession, getWorkoutsGroupedByBodyPart, calcExerciseWorkload } from '../lib/store'
+import { BODY_PARTS, getWorkoutsGroupedByBodyPart, calcExerciseWorkload } from '../lib/store'
 import './WorkoutLog.css'
 
-function WorkoutLog({ workouts, onRefresh, onEdit }) {
+function WorkoutLog({ workouts, onEdit, onDelete }) {
   const grouped = getWorkoutsGroupedByBodyPart(workouts)
-
-  const handleDelete = (id) => {
-    if (window.confirm('Delete this workout session?')) {
-      deleteWorkoutSession(id)
-      onRefresh()
-    }
-  }
 
   return (
     <div className="workout-log">
@@ -43,7 +36,7 @@ function WorkoutLog({ workouts, onRefresh, onEdit }) {
                       key={session.id}
                       session={session}
                       onEdit={onEdit}
-                      onDelete={handleDelete}
+                      onDelete={onDelete}
                     />
                   ))}
                 </div>

@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import {
   BODY_PARTS,
-  addWorkoutSession,
-  updateWorkoutSession,
   calcExerciseWorkload,
 } from '../lib/store'
 import './SessionForm.css'
@@ -116,12 +114,7 @@ function SessionForm({ session, onSave, onCancel }) {
       notes: notes.trim(),
     }
 
-    if (isEditing) {
-      updateWorkoutSession(session.id, payload)
-    } else {
-      addWorkoutSession(payload)
-    }
-    onSave()
+    onSave(payload, isEditing ? session.id : null)
   }
 
   return (

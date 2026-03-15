@@ -40,52 +40,24 @@ export function saveWorkouts(workouts) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(workouts))
 }
 
-export function addWorkoutSession(session) {
-  const workouts = loadWorkouts()
-  const newSession = {
-    id: crypto.randomUUID(),
-    date: session.date,
-    bodyPart: session.bodyPart,
-    exercises: session.exercises || [],
-    notes: session.notes || '',
-    createdAt: new Date().toISOString(),
-  }
-  workouts.push(newSession)
-  workouts.sort((a, b) => new Date(b.date) - new Date(a.date))
-  saveWorkouts(workouts)
-  return newSession
-}
+// The functions below are kept for backward compatibility,
+// but can also operate on an explicitly provided workouts array.
 
-export function updateWorkoutSession(id, updates) {
-  const workouts = loadWorkouts()
-  const idx = workouts.findIndex((w) => w.id === id)
-  if (idx === -1) return null
-  workouts[idx] = { ...workouts[idx], ...updates }
-  workouts.sort((a, b) => new Date(b.date) - new Date(a.date))
-  saveWorkouts(workouts)
-  return workouts[idx]
-}
-
-export function deleteWorkoutSession(id) {
-  const workouts = loadWorkouts().filter((w) => w.id !== id)
-  saveWorkouts(workouts)
-  return true
-}
-
-export function getWorkoutsByDateRange(start, end) {
-  return loadWorkouts().filter((w) => {
+export function getWorkoutsByDateRange(start, end, workoutsArg) {
+  const workouts = Array.isArray(workoutsArg) ? workoutsArg : loadWorkouts()
+  return workouts.filter((w) => {
     const d = new Date(w.date)
     return d >= start && d <= end
   })
 }
 
-export function getWeeklyWorkload() {
+export function getWeeklyWorkload(workoutsArg) {
   const now = new Date()
   const weekStart = startOfWeek(now, { weekStartsOn: 1 })
   const weekEnd = new Date(weekStart)
   weekEnd.setDate(weekEnd.getDate() + 6)
 
-  const workouts = getWorkoutsByDateRange(weekStart, weekEnd)
+  const workouts = getWorkoutsByDateRange(weekStart, weekEnd, workoutsArg)
 
   const byBodyPart = BODY_PARTS.reduce((acc, { id }) => {
     acc[id] = { sets: 0, exercises: 0, volume: 0, workload: 0 }
@@ -109,12 +81,12 @@ export function getWeeklyWorkload() {
   return byBodyPart
 }
 
-export function getMonthlyWorkload() {
+export function getMonthlyWorkload(workoutsArg) {
   const now = new Date()
   const monthStart = startOfMonth(now)
   const monthEnd = new Date(monthStart.getFullYear(), monthStart.getMonth() + 1, 0)
 
-  const workouts = getWorkoutsByDateRange(monthStart, monthEnd)
+  const workouts = getWorkoutsByDateRange(monthStart, monthEnd, workoutsArg)
 
   const byBodyPart = BODY_PARTS.reduce((acc, { id }) => {
     acc[id] = { sets: 0, exercises: 0, volume: 0, workload: 0 }
@@ -141,15 +113,15 @@ export function getMonthlyWorkload() {
 /**
  * Get workload history for progress tracking (last N weeks)
  */
-export function getWorkloadHistory(weeks = 8) {
-  const workouts = loadWorkouts()
+export function getWorkloadHistory(weeks = 8, workoutsArg) {
+  const workouts = Array.isArray(workoutsArg) ? workoutsArg : loadWorkouts()
   const now = new Date()
   const history = []
   for (let i = weeks - 1; i >= 0; i--) {
     const weekStart = startOfWeek(subWeeks(now, i), { weekStartsOn: 1 })
     const weekEnd = new Date(weekStart)
     weekEnd.setDate(weekEnd.getDate() + 6)
-    const weekWorkouts = getWorkoutsByDateRange(weekStart, weekEnd)
+    const weekWorkouts = getWorkoutsByDateRange(weekStart, weekEnd, workouts)
     const byBodyPart = BODY_PARTS.reduce((acc, { id }) => {
       acc[id] = 0
       return acc
@@ -173,7 +145,8 @@ export function getWorkloadHistory(weeks = 8) {
   return history
 }
 
-export function getWorkoutsGroupedByBodyPart(workouts = loadWorkouts()) {
+export function getWorkoutsGroupedByBodyPart(workoutsArg) {
+  const workouts = Array.isArray(workoutsArg) ? workoutsArg : loadWorkouts()
   const grouped = {}
   BODY_PARTS.forEach(({ id }) => (grouped[id] = []))
   workouts.forEach((w) => {
@@ -185,3 +158,4 @@ export function getWorkoutsGroupedByBodyPart(workouts = loadWorkouts()) {
   })
   return grouped
 }
+

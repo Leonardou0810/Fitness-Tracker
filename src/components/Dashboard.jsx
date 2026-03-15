@@ -3,9 +3,9 @@ import { startOfWeek, startOfMonth, format } from 'date-fns'
 import './Dashboard.css'
 
 function Dashboard({ workouts }) {
-  const weekly = getWeeklyWorkload()
-  const monthly = getMonthlyWorkload()
-  const history = getWorkloadHistory(8)
+  const weekly = getWeeklyWorkload(workouts)
+  const monthly = getMonthlyWorkload(workouts)
+  const history = getWorkloadHistory(8, workouts)
   const weekStart = startOfWeek(new Date(), { weekStartsOn: 1 })
   const monthStart = startOfMonth(new Date())
 
